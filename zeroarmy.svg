@@ -1,10 +1,8 @@
 <svg width="555" height="555" xmlns="http://www.w3.org/2000/svg">
 
     <g>
-        <title>Z3R0 ARMY</title>
         <rect stroke="#000" height="555" width="555" y="0" x="0" fill="#000" />
-        <text transform="matrix(1 0 0 1 0 0)" style="cursor: move;" xml:space="preserve" text-anchor="middle"
-            font-family="'Markazi Text'" font-size="69" stroke-width="2" y="277.5" x="277.5" stroke="#000000"
-            fill="#ffffff">ZERO ARMY</text>
+        <text style="cursor: move;" xml:space="preserve" text-anchor="middle" font-family="'Markazi Text'"
+            font-size="69" stroke-width="2" y="277.5" x="277.5" stroke="#000000" fill="#ffffff">ZERO ARMY</text>
     </g>
 </svg>
