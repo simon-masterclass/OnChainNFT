@@ -35,17 +35,19 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
         _safeMint(msg.sender, supply + 1);
     }
 
-    function buildImage() public view returns (string memory) {
+    function buildImage(
+        string memory _nameC0
+    ) public pure returns (string memory) {
         return
             string(
                 abi.encodePacked(
                     '<svg width="555" height="555" xmlns="http://www.w3.org/2000/svg">',
                     '<rect stroke="#000" height="555" width="555" y="0" x="0" fill="#000" />',
                     '<text dominant-baseline="middle" style="cursor: pointer;" text-anchor="middle" font-family="Impact" font-size="111" y="34%" x="50%" stroke="#000000" fill="#ffffff">ZERO ARMY</text>',
-                    "",
-                    "",
-                    "",
-                    '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier" font-size="55" stroke-width="2" y="69%" x="50%" stroke="#a10000" fill="#ffffff">Bravo Company</text>',
+                    '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier" font-size="55" stroke-width="2" y="50%" x="50%" stroke="#a10000" fill="#ffffff">BRAVO COMPANY</text>',
+                    '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier new" font-size="40" stroke-width="2" y="69%" x="50%" stroke="#ffffff" fill="#ffffff">',
+                    _nameC0,
+                    "</text>",
                     "</svg>"
                 )
             );
@@ -75,10 +77,6 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
     //only owner
     function setCost(uint256 _newCost) public onlyOwner {
         cost = _newCost;
-    }
-
-    function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
-        maxMintAmount = _newmaxMintAmount;
     }
 
     function pause(bool _state) public onlyOwner {
