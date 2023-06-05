@@ -1,0 +1,14 @@
+<svg width="555" height="555" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @import url("https://fonts.googleapis.com/css?family=Roboto:400");
+        </style>
+    </defs>
+    <rect stroke="#000" height="555" width="555" y="0" x="0" fill="#000" />
+    <text dominant-baseline="middle" style="cursor: pointer;" text-anchor="middle" font-family="Roboto" font-size="88"
+        y="34%" x="50%" stroke="#000000" fill="#ffffff">ZERO
+        ARMY</text>
+    <text dominant-baseline="middle" text-anchor="middle" font-family="'Roboto" font-size="55" stroke-width="2" y="69%"
+        x="50%" stroke="#d71717" fill="#ffffff">BRAVO COMPANY</text>
+
+</svg>

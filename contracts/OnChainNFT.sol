@@ -25,11 +25,30 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
         uint256 supply = totalSupply();
         require(!paused);
         require(supply + 1 <= maxSupply);
-
+        require(
+            balanceOf(msg.sender) < 1,
+            "You can only mint one NFT per wallet"
+        );
         if (msg.sender != owner()) {
             require(msg.value >= cost);
         }
         _safeMint(msg.sender, supply + 1);
+    }
+
+    function buildImage() public view returns (string memory) {
+        return
+            string(
+                abi.encodePacked(
+                    '<svg width="555" height="555" xmlns="http://www.w3.org/2000/svg">',
+                    '<rect stroke="#000" height="555" width="555" y="0" x="0" fill="#000" />',
+                    '<text dominant-baseline="middle" style="cursor: pointer;" text-anchor="middle" font-family="Impact" font-size="111" y="34%" x="50%" stroke="#000000" fill="#ffffff">ZERO ARMY</text>',
+                    "",
+                    "",
+                    "",
+                    '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier" font-size="55" stroke-width="2" y="69%" x="50%" stroke="#a10000" fill="#ffffff">Bravo Company</text>',
+                    "</svg>"
+                )
+            );
     }
 
     function walletOfOwner(
@@ -50,6 +69,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
             _exists(tokenId),
             "ERC721Metadata: URI query for nonexistent token"
         );
+        return "";
     }
 
     //only owner
