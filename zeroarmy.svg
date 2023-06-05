@@ -2,7 +2,7 @@
 
     <g>
         <rect stroke="#000" height="555" width="555" y="0" x="0" fill="#000" />
-        <text style="cursor: move;" xml:space="preserve" text-anchor="middle" font-family="'Markazi Text'"
-            font-size="69" stroke-width="2" y="277.5" x="277.5" stroke="#000000" fill="#ffffff">ZERO ARMY</text>
+        <text dominant-baseline="middle" style="cursor: pointer;" text-anchor="middle" font-family="'Markazi Text'"
+            font-size="69" stroke-width="2" y="50%" x="50%" stroke="#000000" fill="#ffffff">ZERO ARMY</text>
     </g>
 </svg>
