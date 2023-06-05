@@ -12,8 +12,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
     using Strings for uint256;
 
     uint256 public cost = 0.05 ether;
-    uint256 public maxSupply = 10000;
-    uint256 public maxMintAmount = 20;
+    uint256 public maxSupply = 100;
     bool public paused = false;
 
     constructor(
@@ -22,20 +21,15 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
     ) ERC721(_name, _symbol) {}
 
     // public
-    function mint(uint256 _mintAmount) public payable {
+    function mint() public payable {
         uint256 supply = totalSupply();
         require(!paused);
-        require(_mintAmount > 0);
-        require(_mintAmount <= maxMintAmount);
-        require(supply + _mintAmount <= maxSupply);
+        require(supply + 1 <= maxSupply);
 
         if (msg.sender != owner()) {
-            require(msg.value >= cost * _mintAmount);
+            require(msg.value >= cost);
         }
-
-        for (uint256 i = 1; i <= _mintAmount; i++) {
-            _safeMint(msg.sender, supply + i);
-        }
+        _safeMint(msg.sender, supply + 1);
     }
 
     function walletOfOwner(
