@@ -14,6 +14,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
     uint256 public cost = 0.05 ether;
     uint256 public maxSupply = 100;
     bool public paused = false;
+    string[] public coderCodeNames;
 
     constructor(
         string memory _name,
@@ -21,7 +22,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
     ) ERC721(_name, _symbol) {}
 
     // public
-    function mint() public payable {
+    function mint(string memory _coderCodeName) public payable {
         uint256 supply = totalSupply();
         require(!paused);
         require(supply + 1 <= maxSupply);
@@ -32,6 +33,8 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
         if (msg.sender != owner()) {
             require(msg.value >= cost);
         }
+
+        coderCodeNames.push(_coderCodeName);
         _safeMint(msg.sender, supply + 1);
     }
 
@@ -39,16 +42,18 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
         string memory _nameC0
     ) public pure returns (string memory) {
         return
-            string(
-                abi.encodePacked(
-                    '<svg width="555" height="555" xmlns="http://www.w3.org/2000/svg">',
-                    '<rect stroke="#000" height="555" width="555" y="0" x="0" fill="#000" />',
-                    '<text dominant-baseline="middle" style="cursor: pointer;" text-anchor="middle" font-family="Impact" font-size="111" y="34%" x="50%" stroke="#000000" fill="#ffffff">ZERO ARMY</text>',
-                    '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier" font-size="55" stroke-width="2" y="50%" x="50%" stroke="#a10000" fill="#ffffff">BRAVO COMPANY</text>',
-                    '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier new" font-size="40" stroke-width="2" y="69%" x="50%" stroke="#ffffff" fill="#ffffff">',
-                    _nameC0,
-                    "</text>",
-                    "</svg>"
+            Base64.encode(
+                bytes(
+                    abi.encodePacked(
+                        '<svg width="555" height="555" xmlns="http://www.w3.org/2000/svg">',
+                        '<rect stroke="#000" height="555" width="555" y="0" x="0" fill="#000" />',
+                        '<text dominant-baseline="middle" style="cursor: pointer;" text-anchor="middle" font-family="Impact" font-size="111" y="34%" x="50%" stroke="#000000" fill="#ffffff">ZERO ARMY</text>',
+                        '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier" font-size="55" stroke-width="2" y="50%" x="50%" stroke="#a10000" fill="#ffffff">BRAVO COMPANY</text>',
+                        '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier new" font-size="40" stroke-width="2" y="69%" x="50%" stroke="#ffffff" fill="#ffffff">',
+                        _nameC0,
+                        "</text>",
+                        "</svg>"
+                    )
                 )
             );
     }
@@ -71,7 +76,27 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
             _exists(tokenId),
             "ERC721Metadata: URI query for nonexistent token"
         );
-        return "";
+
+        return
+            string(
+                abi.encodePacked(
+                    "data:application/json;base64,",
+                    Base64.encode(
+                        bytes(
+                            abi.encodePacked(
+                                '{"name":"',
+                                "Bravo Company",
+                                '", "description":"',
+                                "Zero Army founding team members",
+                                '", "image":"',
+                                "data:image/svg+xml;base64,",
+                                buildImage(coderCodeNames[tokenId - 1]),
+                                '"}'
+                            )
+                        )
+                    )
+                )
+            );
     }
 
     //only owner
