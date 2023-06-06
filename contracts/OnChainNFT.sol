@@ -14,7 +14,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
     uint256 public cost = 0.05 ether;
     uint256 public maxSupply = 100;
     bool public paused = false;
-    string[] public coderCodeNames;
+    string[] private coderCodeNames;
 
     constructor(
         string memory _name,
@@ -40,7 +40,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
 
     function buildImage(
         string memory _nameC0
-    ) public pure returns (string memory) {
+    ) internal pure returns (string memory) {
         return
             Base64.encode(
                 bytes(
