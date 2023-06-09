@@ -38,6 +38,19 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
         _safeMint(msg.sender, supply + 1);
     }
 
+    function randomNum(
+        uint256 _modulus,
+        uint256 _seed,
+        uint256 _salt
+    ) internal view returns (uint256) {
+        uint256 randomNum = uint256(
+            keccak256(
+                abi.encodePacked(block.timestamp, msg.sender, _salt, _seed)
+            )
+        );
+        return randomNum % _modulus;
+    }
+
     function buildImage(
         string memory _nameC0
     ) internal pure returns (string memory) {
