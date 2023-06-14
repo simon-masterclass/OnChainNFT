@@ -43,23 +43,25 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
         uint256 _seed,
         uint256 _salt
     ) internal view returns (uint256) {
-        uint256 randomNum = uint256(
+        uint256 randomNumber = uint256(
             keccak256(
                 abi.encodePacked(block.timestamp, msg.sender, _salt, _seed)
             )
         );
-        return randomNum % _modulus;
+        return randomNumber % _modulus;
     }
 
     function buildImage(
         string memory _nameC0
-    ) internal pure returns (string memory) {
+    ) internal view returns (string memory) {
         return
             Base64.encode(
                 bytes(
                     abi.encodePacked(
                         '<svg width="555" height="555" xmlns="http://www.w3.org/2000/svg">',
-                        '<rect stroke="#000" height="555" width="555" y="0" x="0" fill="#000" />',
+                        '<rect stroke="#000" height="555" width="555" y="0" x="0" fill="hsl(',
+                        randomNum(361, 3, 4).toString(),
+                        ',80%,80%)" />',
                         '<text dominant-baseline="middle" text-anchor="middle" font-family="Impact" font-size="111" y="34%" x="50%" stroke="#000000" fill="#ffffff">ZERO ARMY</text>',
                         '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier" font-size="55" stroke-width="2" y="50%" x="50%" stroke="#a10000" fill="#ffffff">BRAVO COMPANY</text>',
                         '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier new" font-size="40" stroke-width="2" y="69%" x="50%" stroke="#ffffff" fill="#ffffff">',
