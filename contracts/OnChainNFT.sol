@@ -67,6 +67,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
                         '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier new" font-size="40" stroke-width="2" y="69%" x="50%" stroke="#ffffff" fill="#ffffff">',
                         _nameC0,
                         "</text>",
+                        '<text dominant-baseline="middle" text-anchor="middle" font-family="Courier new" font-size="22" y="88%" x="50%" fill="#ffffff"> zeroarmy.org </text>',
                         "</svg>"
                     )
                 )
