@@ -103,7 +103,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
                                 '{"name":"',
                                 "Bravo Company",
                                 '", "description":"',
-                                "Zero Army founding team members - zeroarmy.org",
+                                "Zero Army founding team members. Go to zeroarmy.org for details.",
                                 '", "image":"',
                                 "data:image/svg+xml;base64,",
                                 buildImage(coderCodeNames[tokenId - 1]),
@@ -119,7 +119,7 @@ contract OnChainNFT is ERC721Enumerable, Ownable {
     function setCost(uint256 _newCost) public onlyOwner {
         cost = _newCost;
     }
-`
+
     function pause(bool _state) public onlyOwner {
         paused = _state;
     }
